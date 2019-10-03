@@ -1,13 +1,12 @@
-import React from 'react'
-//My to do list
+import React from 'react';
 
-const Todos = props => {
-    return (
-        <div> 
-        
-     <p>Hello again</p>
-        
-        </div>
+const Todo = props => {
+    return(
+<div onClick={props.onClick}> 
+    <p>{props.task}</p>
+</div>
     )
 }
-export default Todos
+
+
+export default Todo
