@@ -1,43 +1,34 @@
 import React, { Component } from 'react';
-
-
-
-
-
+import './Todo.css';
 
 export class TodoForm extends Component {
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 		this.state = {
-			value: ''
+			taskText: ''
 		};
 	}
 
 	handleChange = (e) => {
-        
 		this.setState({
-            value: e.target.value
-            
-		});console.log('this',e)
+			taskText: e.target.value
+		});
 	};
 
-	handleSubmit = (e) => {
-		this.props.addTask(e, this.state.value);
-        e.preventDefault();
-        this.state({
-            value: ''
-        })
-		console.log('submit', this.state);
+	handleSubmit = (event) => {
+		event.preventDefault();
+		this.props.addTask(this.state.taskText);
+		this.setState({
+			taskText: ''
+		});
 	};
 
 	render() {
 		return (
-			<div className="todoForm">
-				<form onSubmit={this.handleSubmit}>
-					<input input="text" value={this.state.value} onChange={this.handleChange} />
-				</form>
-				<button type="submit">Submit</button>
-			</div>
+			<form onSubmit={this.handleSubmit}>
+				<input input="text" name={this.state.taskText} onChange={this.handleChange} />
+				<button type="submit">Add</button>
+			</form>
 		);
 	}
 }
