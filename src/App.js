@@ -1,9 +1,9 @@
 import React from 'react';
-import Todo from './components/TodoComponents/Todo';
 import TodoForm from './components/TodoComponents/TodoForm';
 import TodoList from './components/TodoComponents/TodoList';
 import { task } from './components/TodoComponents/task';
 import './components/TodoComponents/Todo.css';
+import Todo from './components/TodoComponents/Todo';
 
 class App extends React.Component {
 	// you will need a place to store your state in this component.
@@ -16,7 +16,8 @@ class App extends React.Component {
 			task: task
 		};
 	}
-	toggleTask = (taskId) => {
+	toggleTask = (e, taskId) => {
+		e.preventDefault();
 		this.setState({
 			task: this.state.task.map((item) => {
 				if (taskId === item.id) {
@@ -42,13 +43,31 @@ class App extends React.Component {
 		});
 	};
 
+	clearTask = (e) => {
+		e.preventDefault();
+		this.setState({
+			task: this.state.task.filter((item) => {
+				return !item.completed;
+			})
+		});
+	};
+
 	render() {
 		return (
 			<div className="App">
-				<h2>Welcome to your Todo App!</h2>
+				<div className="header">
+					<h2>Welcome to your Todo App!</h2>
+				</div>
 				<TodoForm addTask={this.addTask} />
 
-				<TodoList task={this.state.task} toggleTask={this.toggleTask} />
+				<div className="todoList">
+					{this.state.task.map((item) => (
+						<Todo key={item.id} item={item} onClick={(e) => this.toggleTask(e, item.id)} />
+					))}
+					<button className="clear-btn" onClick={this.clearTask}>
+						Clear Task
+					</button>
+				</div>
 			</div>
 		);
 	}

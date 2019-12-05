@@ -92,5 +92,7 @@ input::placeholder {
 }
 
 .clear-btn {
+	background-color: #6d6d82;
 	margin-top: 16px;
+	font-size: 0.8rem;
 }

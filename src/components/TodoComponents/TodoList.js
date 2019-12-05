@@ -6,6 +6,12 @@ import React from 'react';
 import Todo from './Todo';
 
 const TodoList = (props) => {
-	return <div className="todoList">{props.task.map((item) => <Todo key={item.id} item={item} />)}</div>;
+	return (
+		<div className="todoList">
+			{this.state.task.map((item) => (
+				<Todo key={item.id} item={item} onClick={(e) => props.toggleTask(e, item.id)} />
+			))}
+		</div>
+	);
 };
 export default TodoList;
